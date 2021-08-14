@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'graphene_django',
     'django_filters',
 
-    'account',
-    'nstore',
+    'nsync_server.account',
+    'nsync_server.nstore',
 ]
 
 MIDDLEWARE = [

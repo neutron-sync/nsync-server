@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from nstore.models import SyncKey, SyncFile, FileVersion
+from nsync_server.nstore.models import SyncKey, SyncFile, FileVersion
 
 @admin.register(SyncKey)
 class KeyAdmin(admin.ModelAdmin):

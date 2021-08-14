@@ -1,6 +1,6 @@
 [project]
-name = ""
-version = ""
+name = "nsync-server"
+version = "0.1.0"
 description = ""
 authors = [
     {name = "Paul Bailey", email = "paul@neutron.studio"},
@@ -15,10 +15,10 @@ dependencies = [
 ]
 requires-python = ">=3.9"
 dynamic = ["classifiers"]
-license = {text = "None"}
+license = {text = "MIT"}
 
 [project.urls]
-homepage = ""
+homepage = "https://github.com/neutron-sync/nsync-server"
 
 [build-system]
 requires = ["pdm-pep517"]

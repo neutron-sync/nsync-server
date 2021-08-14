@@ -1,6 +1,6 @@
 from django import forms
 
-from nstore.models import SyncKey, SyncFile, FileVersion
+from nsync_server.nstore.models import SyncKey, SyncFile, FileVersion
 
 
 class AddKeyForm(forms.ModelForm):

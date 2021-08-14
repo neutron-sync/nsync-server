@@ -4,8 +4,8 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphene_django.forms.mutation import DjangoModelFormMutation
 
-from nstore.models import SyncKey, SyncFile, FileVersion
-from nstore.forms import AddKeyForm
+from nsync_server.nstore.models import SyncKey, SyncFile, FileVersion
+from nsync_server.nstore.forms import AddKeyForm
 
 
 class SyncKeyNode(DjangoObjectType):

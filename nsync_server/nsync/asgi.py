@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'nsync.settings.dev')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'nsync_server.nsync.settings.dev')
 
 application = get_asgi_application()
