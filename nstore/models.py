@@ -10,6 +10,7 @@ class SyncKey(models.Model):
 	owner = models.ForeignKey('account.User', on_delete=models.CASCADE)
 
 	class Meta:
+		ordering = ('-created',)
 		unique_together = [
     	["name", "owner"],
 		]
@@ -27,6 +28,7 @@ class SyncFile(models.Model):
 	key = models.ForeignKey(SyncKey, on_delete=models.CASCADE)
 
 	class Meta:
+		ordering = ('-created',)
 		unique_together = [
     	["path", "key"],
 		]
@@ -44,6 +46,7 @@ class FileVersion(models.Model):
 	sync_file = models.ForeignKey(SyncFile, on_delete=models.CASCADE)
 
 	class Meta:
+		ordering = ('-created',)
 		get_latest_by = 'created'
 		index_together = [
     	["sync_file", "created"],
@@ -51,3 +54,6 @@ class FileVersion(models.Model):
 
 	def __str__(self):
 		return f'{self.sync_file.path} {self.uhash}'
+
+	def download(self):
+		return self.efile.url

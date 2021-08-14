@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'graphene_django',
+    'django_filters',
+
     'account',
     'nstore',
 ]
@@ -133,3 +136,8 @@ STATIC_ROOT = BASE_DIR / 'static_compiled'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
+GRAPHENE = {
+    "SCHEMA": "nsync.schema.core_schema",
+    "RELAY_CONNECTION_ENFORCE_FIRST_OR_LAST": True,
+    "RELAY_CONNECTION_MAX_LIMIT": 500,
+}

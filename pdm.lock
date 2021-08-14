@@ -1,4 +1,10 @@
 [[package]]
+name = "aniso8601"
+sections = ["default"]
+version = "7.0.0"
+summary = "A library for parsing ISO 8601 strings."
+
+[[package]]
 name = "asgiref"
 sections = ["default"]
 version = "3.4.1"
@@ -22,6 +28,73 @@ dependencies = [
 ]
 
 [[package]]
+name = "django-filter"
+sections = ["default"]
+version = "2.4.0"
+summary = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
+dependencies = [
+    "Django>=2.2",
+]
+
+[[package]]
+name = "graphene"
+sections = ["default"]
+version = "2.1.9"
+summary = "GraphQL Framework for Python"
+dependencies = [
+    "six<2,>=1.10.0",
+    "graphql-core<3,>=2.1",
+    "graphql-relay<3,>=2",
+    "aniso8601<=7,>=3",
+]
+
+[[package]]
+name = "graphene-django"
+sections = ["default"]
+version = "2.15.0"
+summary = "Graphene Django integration"
+dependencies = [
+    "six>=1.10.0",
+    "graphene<3,>=2.1.7",
+    "graphql-core<3,>=2.1.0",
+    "Django>=1.11",
+    "singledispatch>=3.4.0.3",
+    "promise>=2.1",
+    "text-unidecode",
+]
+
+[[package]]
+name = "graphql-core"
+sections = ["default"]
+version = "2.3.2"
+summary = "GraphQL implementation for Python"
+dependencies = [
+    "six>=1.10.0",
+    "promise<3,>=2.3",
+    "rx<2,>=1.6",
+]
+
+[[package]]
+name = "graphql-relay"
+sections = ["default"]
+version = "2.0.1"
+summary = "Relay implementation for Python"
+dependencies = [
+    "six>=1.12",
+    "graphql-core<3,>=2.2",
+    "promise<3,>=2.2",
+]
+
+[[package]]
+name = "promise"
+sections = ["default"]
+version = "2.3"
+summary = "Promises/A+ implementation for Python"
+dependencies = [
+    "six",
+]
+
+[[package]]
 name = "psycopg2-binary"
 sections = ["default"]
 version = "2.9.1"
@@ -34,10 +107,37 @@ version = "2021.1"
 summary = "World timezone definitions, modern and historical"
 
 [[package]]
+name = "rx"
+sections = ["default"]
+version = "1.6.1"
+summary = "Reactive Extensions (Rx) for Python"
+
+[[package]]
+name = "singledispatch"
+sections = ["default"]
+version = "3.7.0"
+summary = "Backport functools.singledispatch from Python 3.4 to Python 2.6-3.3."
+dependencies = [
+    "six",
+]
+
+[[package]]
+name = "six"
+sections = ["default"]
+version = "1.16.0"
+summary = "Python 2 and 3 compatibility utilities"
+
+[[package]]
 name = "sqlparse"
 sections = ["default"]
 version = "0.4.1"
 summary = "A non-validating SQL parser."
+
+[[package]]
+name = "text-unidecode"
+sections = ["default"]
+version = "1.3"
+summary = "The most basic Text::Unidecode port"
 
 [[package]]
 name = "whitenoise"
@@ -47,9 +147,13 @@ summary = "Radically simplified static file serving for WSGI applications"
 
 [metadata]
 lock_version = "2"
-content_hash = "sha256:c9d98b63f5cebb40996587f8cb7d85bd8cd0a219f5b69c55e6713c35ca9580eb"
+content_hash = "sha256:ef68956ebbc36edff1274e03d6091d5af6e664de0e3f3fec735330da9f2d5fd9"
 
 [metadata.files]
+"aniso8601 7.0.0" = [
+    {file = "aniso8601-7.0.0-py2.py3-none-any.whl", hash = "sha256:d10a4bf949f619f719b227ef5386e31f49a2b6d453004b21f02661ccc8670c7b"},
+    {file = "aniso8601-7.0.0.tar.gz", hash = "sha256:513d2b6637b7853806ae79ffaca6f3e8754bdd547048f5ccc1420aec4b714f1e"},
+]
 "asgiref 3.4.1" = [
     {file = "asgiref-3.4.1-py3-none-any.whl", hash = "sha256:ffc141aa908e6f175673e7b1b3b7af4fdb0ecb738fc5c8b88f69f055c2415214"},
     {file = "asgiref-3.4.1.tar.gz", hash = "sha256:4ef1ab46b484e3c706329cedeff284a5d40824200638503f5768edb6de7d58e9"},
@@ -61,6 +165,29 @@ content_hash = "sha256:c9d98b63f5cebb40996587f8cb7d85bd8cd0a219f5b69c55e6713c35c
 "django 3.2.6" = [
     {file = "Django-3.2.6-py3-none-any.whl", hash = "sha256:7f92413529aa0e291f3be78ab19be31aefb1e1c9a52cd59e130f505f27a51f13"},
     {file = "Django-3.2.6.tar.gz", hash = "sha256:f27f8544c9d4c383bbe007c57e3235918e258364577373d4920e9162837be022"},
+]
+"django-filter 2.4.0" = [
+    {file = "django_filter-2.4.0-py3-none-any.whl", hash = "sha256:e00d32cebdb3d54273c48f4f878f898dced8d5dfaad009438fe61ebdf535ace1"},
+    {file = "django-filter-2.4.0.tar.gz", hash = "sha256:84e9d5bb93f237e451db814ed422a3a625751cbc9968b484ecc74964a8696b06"},
+]
+"graphene 2.1.9" = [
+    {file = "graphene-2.1.9-py2.py3-none-any.whl", hash = "sha256:3d446eb1237c551052bc31155cf1a3a607053e4f58c9172b83a1b597beaa0868"},
+    {file = "graphene-2.1.9.tar.gz", hash = "sha256:b9f2850e064eebfee9a3ef4a1f8aa0742848d97652173ab44c82cc8a62b9ed93"},
+]
+"graphene-django 2.15.0" = [
+    {file = "graphene_django-2.15.0-py2.py3-none-any.whl", hash = "sha256:02671d195f0c09c8649acff2a8f4ad4f297d0f7d98ea6e6cdf034b81bab92880"},
+    {file = "graphene-django-2.15.0.tar.gz", hash = "sha256:b78c9b05bc899016b9cc5bf13faa1f37fe1faa8c5407552c6ddd1a28f46fc31a"},
+]
+"graphql-core 2.3.2" = [
+    {file = "graphql_core-2.3.2-py2.py3-none-any.whl", hash = "sha256:44c9bac4514e5e30c5a595fac8e3c76c1975cae14db215e8174c7fe995825bad"},
+    {file = "graphql-core-2.3.2.tar.gz", hash = "sha256:aac46a9ac524c9855910c14c48fc5d60474def7f99fd10245e76608eba7af746"},
+]
+"graphql-relay 2.0.1" = [
+    {file = "graphql_relay-2.0.1-py3-none-any.whl", hash = "sha256:ac514cb86db9a43014d7e73511d521137ac12cf0101b2eaa5f0a3da2e10d913d"},
+    {file = "graphql-relay-2.0.1.tar.gz", hash = "sha256:870b6b5304123a38a0b215a79eace021acce5a466bf40cd39fa18cb8528afabb"},
+]
+"promise 2.3" = [
+    {file = "promise-2.3.tar.gz", hash = "sha256:dfd18337c523ba4b6a58801c164c1904a9d4d1b1747c7d5dbf45b693a49d93d0"},
 ]
 "psycopg2-binary 2.9.1" = [
     {file = "psycopg2_binary-2.9.1-cp36-cp36m-macosx_10_14_x86_64.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:c250a7ec489b652c892e4f0a5d122cc14c3780f9f643e1a326754aedf82d9a76"},
@@ -97,9 +224,25 @@ content_hash = "sha256:c9d98b63f5cebb40996587f8cb7d85bd8cd0a219f5b69c55e6713c35c
     {file = "pytz-2021.1-py2.py3-none-any.whl", hash = "sha256:eb10ce3e7736052ed3623d49975ce333bcd712c7bb19a58b9e2089d4057d0798"},
     {file = "pytz-2021.1.tar.gz", hash = "sha256:83a4a90894bf38e243cf052c8b58f381bfe9a7a483f6a9cab140bc7f702ac4da"},
 ]
+"rx 1.6.1" = [
+    {file = "Rx-1.6.1-py2.py3-none-any.whl", hash = "sha256:7357592bc7e881a95e0c2013b73326f704953301ab551fbc8133a6fadab84105"},
+    {file = "Rx-1.6.1.tar.gz", hash = "sha256:13a1d8d9e252625c173dc795471e614eadfe1cf40ffc684e08b8fff0d9748c23"},
+]
+"singledispatch 3.7.0" = [
+    {file = "singledispatch-3.7.0-py2.py3-none-any.whl", hash = "sha256:bc77afa97c8a22596d6d4fc20f1b7bdd2b86edc2a65a4262bdd7cc3cc19aa989"},
+    {file = "singledispatch-3.7.0.tar.gz", hash = "sha256:c1a4d5c1da310c3fd8fccfb8d4e1cb7df076148fd5d858a819e37fffe44f3092"},
+]
+"six 1.16.0" = [
+    {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
+    {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
+]
 "sqlparse 0.4.1" = [
     {file = "sqlparse-0.4.1-py3-none-any.whl", hash = "sha256:017cde379adbd6a1f15a61873f43e8274179378e95ef3fede90b5aa64d304ed0"},
     {file = "sqlparse-0.4.1.tar.gz", hash = "sha256:0f91fd2e829c44362cbcfab3e9ae12e22badaa8a29ad5ff599f9ec109f0454e8"},
+]
+"text-unidecode 1.3" = [
+    {file = "text_unidecode-1.3-py2.py3-none-any.whl", hash = "sha256:1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8"},
+    {file = "text-unidecode-1.3.tar.gz", hash = "sha256:bad6603bb14d279193107714b288be206cac565dfa49aa5b105294dd5c4aab93"},
 ]
 "whitenoise 5.3.0" = [
     {file = "whitenoise-5.3.0-py2.py3-none-any.whl", hash = "sha256:d963ef25639d1417e8a247be36e6aedd8c7c6f0a08adcb5a89146980a96b577c"},

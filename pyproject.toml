@@ -10,6 +10,8 @@ dependencies = [
     "dj-database-url~=0.5",
     "psycopg2-binary~=2.9",
     "whitenoise~=5.3",
+    "graphene-django~=2.15",
+    "django-filter~=2.4",
 ]
 requires-python = ">=3.9"
 dynamic = ["classifiers"]
