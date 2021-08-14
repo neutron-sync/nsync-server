@@ -8,24 +8,21 @@ authors = [
 dependencies = [
     "django~=3.2",
     "dj-database-url~=0.5",
+    "graphene-django~=2.15",
     "psycopg2-binary~=2.9",
     "whitenoise~=5.3",
-    "graphene-django~=2.15",
     "django-filter~=2.4",
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.7"
 dynamic = ["classifiers"]
 license = {text = "MIT"}
 
 [project.urls]
-homepage = "https://github.com/neutron-sync/nsync-server"
+homepage = ""
 
 [build-system]
 requires = ["pdm-pep517"]
 build-backend = "pdm.pep517.api"
-
-[tool]
-[tool.pdm]
 
 [tool.pdm.scripts]
 _.env_file = ".env"
