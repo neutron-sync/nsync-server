@@ -2,8 +2,10 @@ import graphene
 from graphene import relay
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
+from graphene_django.forms.mutation import DjangoModelFormMutation
 
 from nstore.models import SyncKey, SyncFile, FileVersion
+from nstore.forms import AddKeyForm
 
 
 class SyncKeyNode(DjangoObjectType):
@@ -53,7 +55,17 @@ class FileVersionNode(DjangoObjectType):
 		return queryset.none()
 
 
+class AddKeyMutation(DjangoModelFormMutation):
+	class Meta:
+		form_class = AddKeyForm
+		exclude_fields = ['id']
+
+
 class Query:
   sync_keys = DjangoFilterConnectionField(SyncKeyNode)
   sync_files = DjangoFilterConnectionField(SyncFileNode)
   file_versions = DjangoFilterConnectionField(FileVersionNode)
+
+
+class Mutation:
+	add_key = AddKeyMutation.Field()
