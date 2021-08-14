@@ -1,0 +1,31 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "Paul Bailey", email = "paul@neutron.studio"},
+]
+dependencies = [
+    "django~=3.2",
+    "dj-database-url~=0.5",
+    "psycopg2-binary~=2.9",
+]
+requires-python = ">=3.9"
+dynamic = ["classifiers"]
+license = {text = "None"}
+
+[project.urls]
+homepage = ""
+
+[build-system]
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
+
+[tool]
+[tool.pdm]
+
+[tool.pdm.scripts]
+_.env_file = ".env"
+manage = "python manage.py"
+req = "pdm export -o requirements.txt --without-hashes --prod"
+format = "yapf -rpi -vv ."
