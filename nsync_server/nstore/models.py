@@ -40,6 +40,7 @@ class SyncFile(models.Model):
 class FileVersion(models.Model):
 	efile = models.FileField(upload_to='sync/%Y/%m/%d/')
 	uhash = models.CharField(max_length=512)
+	permissions = models.PositiveSmallIntegerField(default=0o755)
 
 	created = models.DateTimeField(auto_now_add=True)
 
