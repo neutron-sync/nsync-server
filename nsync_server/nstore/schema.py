@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 import graphene
 from graphene import relay
 from graphene_django.types import DjangoObjectType, ErrorType
@@ -97,7 +99,10 @@ class SaveVersionMutation(DjangoFormMutation):
 		if key is None:
 			return cls(errors=[ErrorType(field='key', messages='Invalid key')])
 
-		#todo
+		trans = FileTransaction(key=key)
+		trans.save()
+
+		form.save_file(key, trans)
 
 		return cls(errors=[], transaction=version.transaction.id, **form.cleaned_data)
 
