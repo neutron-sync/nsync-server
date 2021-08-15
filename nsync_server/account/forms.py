@@ -1,5 +1,7 @@
 from django import forms
 
+from nsync_server.account.models import User
+
 
 class LoginForm(forms.Form):
   username = forms.CharField(required=True)

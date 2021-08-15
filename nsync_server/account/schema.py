@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate, login, update_session_auth_hash
+
 import graphene
 from graphene import relay
 from graphene_django.types import DjangoObjectType, ErrorType

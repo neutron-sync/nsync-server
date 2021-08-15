@@ -60,6 +60,14 @@ class AddKeyMutation(DjangoModelFormMutation):
 		form_class = AddKeyForm
 		exclude_fields = ['id']
 
+	@classmethod
+	def perform_mutate(cls, form, info):
+		obj = form.save(commit=False)
+		obj.owner = info.context.user
+		obj.save()
+		kwargs = {cls._meta.return_field_name: obj}
+		return cls(errors=[], **kwargs)
+
 
 class Query:
   sync_keys = DjangoFilterConnectionField(SyncKeyNode)
