@@ -36,15 +36,30 @@ class SyncFile(models.Model):
 	def __str__(self):
 		return self.path
 
+class FileTransaction(models.Model):
+	key = models.ForeignKey(SyncKey, on_delete=models.CASCADE)
+	created = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		ordering = ('-created',)
+		unique_together = [
+    	["created", "key"],
+		]
+
+	def __str__(self):
+		return '{} {}'.format(self.key.name, self.created.isoformat())
+
 
 class FileVersion(models.Model):
-	efile = models.FileField(upload_to='sync/%Y/%m/%d/')
-	uhash = models.CharField(max_length=512)
+	efile = models.FileField(upload_to='sync/%Y/%m/%d/', blank=True, null=True)
+	uhash = models.CharField(max_length=512, blank=True, null=True)
 	permissions = models.PositiveSmallIntegerField(default=0o755)
+	is_dir = models.BooleanField(default=False)
 
 	created = models.DateTimeField(auto_now_add=True)
 
 	sync_file = models.ForeignKey(SyncFile, on_delete=models.CASCADE)
+	transaction = models.ForeignKey(FileTransaction, on_delete=models.CASCADE)
 
 	class Meta:
 		ordering = ('-created',)
