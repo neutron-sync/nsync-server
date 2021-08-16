@@ -1,5 +1,6 @@
 from django.utils import timezone
 
+import django_filters
 import graphene
 from graphene import relay
 from graphene_django.types import DjangoObjectType, ErrorType
@@ -25,6 +26,14 @@ class SyncKeyNode(DjangoObjectType):
 		return queryset.none()
 
 
+class FileTransactionFilter(django_filters.FilterSet):
+	key = django_filters.CharFilter(field_name='key__name')
+
+	class Meta:
+		model = FileTransaction
+		fields = ['id', 'key']
+
+
 class FileTransactionNode(DjangoObjectType):
 	class Meta:
 		model = FileTransaction
@@ -38,6 +47,14 @@ class FileTransactionNode(DjangoObjectType):
 			return queryset.filter(key__owner=info.context.user)
 
 		return queryset.none()
+
+
+class SyncFileFilter(django_filters.FilterSet):
+	key = django_filters.CharFilter(field_name='key__name')
+
+	class Meta:
+		model = SyncFile
+		fields = ['id', 'key', 'path']
 
 
 class SyncFileNode(DjangoObjectType):
@@ -61,7 +78,7 @@ class FileVersionNode(DjangoObjectType):
 	class Meta:
 		model = FileVersion
 		filter_fields = ['id', 'sync_file']
-		fields = ('created', 'sync_file', 'id', 'transaction')
+		fields = ('created', 'id', 'transaction')
 		interfaces = (relay.Node, )
 
 	@classmethod
@@ -92,25 +109,26 @@ class SaveVersionMutation(DjangoFormMutation):
 	class Meta:
 		form_class = SaveVersionForm
 
-
 	@classmethod
 	def perform_mutate(cls, form, info):
 		key = SyncKey.objects.filter(name=form.cleaned_data['key'], owner=info.context.user).first()
 		if key is None:
 			return cls(errors=[ErrorType(field='key', messages='Invalid key')])
 
-		trans = FileTransaction(key=key)
-		trans.save()
+		if not hasattr(info.context, 'transaction'):
+			trans = FileTransaction(key=key)
+			trans.save()
+			info.context.transaction = trans
 
-		form.save_file(key, trans)
-
+		version = form.save_file(key, info.context.transaction)
 		return cls(errors=[], transaction=version.transaction.id, **form.cleaned_data)
+
 
 class Query:
   sync_keys = DjangoFilterConnectionField(SyncKeyNode)
-  sync_files = DjangoFilterConnectionField(SyncFileNode)
+  sync_files = DjangoFilterConnectionField(SyncFileNode, filterset_class=SyncFileFilter)
   file_versions = DjangoFilterConnectionField(FileVersionNode)
-  file_transactions = DjangoFilterConnectionField(FileTransactionNode)
+  file_transactions = DjangoFilterConnectionField(FileTransactionNode, filterset_class=FileTransactionFilter)
 
 
 class Mutation:

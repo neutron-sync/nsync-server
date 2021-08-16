@@ -36,6 +36,7 @@ class SyncFile(models.Model):
 	def __str__(self):
 		return self.path
 
+
 class FileTransaction(models.Model):
 	key = models.ForeignKey(SyncKey, on_delete=models.CASCADE)
 	created = models.DateTimeField(auto_now_add=True)
