@@ -1,2 +1,2 @@
-python manage.py collectstatic --noinput
-python manage.py migrate
+python nsync_server/manage.py collectstatic --noinput
+python nsync_server/manage.py migrate
