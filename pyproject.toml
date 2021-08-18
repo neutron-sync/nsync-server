@@ -13,6 +13,8 @@ dependencies = [
     "whitenoise~=5.3",
     "django-filter~=2.4",
     "gunicorn~=20.1",
+    "django-storages~=1.11",
+    "boto3~=1.18",
 ]
 requires-python = ">=3.7"
 dynamic = ["classifiers"]
