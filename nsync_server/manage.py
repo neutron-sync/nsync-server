@@ -7,7 +7,7 @@ import sys
 def main():
     """Run administrative tasks."""
     ppath = os.environ.get('PYTHONPATH', '')
-    mydir = os.path.abspath(os.path.dirname(__file__))
+    mydir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     print('NARF', mydir)
     if mydir not in ppath:
         if ppath:
