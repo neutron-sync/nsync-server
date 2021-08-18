@@ -41,6 +41,7 @@ class SaveVersionForm(forms.Form):
 		version.save()
 
 		if self.cleaned_data['ebody']:
+			print(type(self.cleaned_data['ebody']), self.cleaned_data['ebody'])
 			content = ContentFile(self.cleaned_data['ebody'])
 			filename = '{}.etxt'.format(uuid.uuid4())
 			version.efile.save(filename, content=content)
