@@ -7,12 +7,13 @@ import sys
 def main():
     """Run administrative tasks."""
     ppath = os.environ.get('PYTHONPATH', '')
-    print('NARF', ppath)
-    if os.getcwd() not in ppath:
+    mydir = os.path.abspath(os.path.dirname(__file__))
+    print('NARF', mydir)
+    if mydir not in ppath:
         if ppath:
-            os.environ['PYTHONPATH'] = ppath + ':' + os.getcwd()
+            os.environ['PYTHONPATH'] = ppath + ':' + mydir
         else:
-            os.environ['PYTHONPATH'] = os.getcwd()
+            os.environ['PYTHONPATH'] = mydir
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'nsync_server.nsync.settings.dev')
     try:
