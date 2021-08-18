@@ -76,5 +76,6 @@ class FileVersion(models.Model):
 	def __str__(self):
 		return f'{self.sync_file.path} {self.uhash}'
 
+	@property
 	def download(self):
 		return self.efile.url
