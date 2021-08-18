@@ -1,4 +1,4 @@
-from nsync.settings.base import *
+from nsync_server.nsync.settings.base import *
 
 DEBUG = False
 
