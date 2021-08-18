@@ -36,6 +36,7 @@ class SyncFile(models.Model):
 	def __str__(self):
 		return self.path
 
+	@property
 	def latest_version(self):
 		return self.fileversion_set.all().first()
 
