@@ -36,6 +36,9 @@ class SyncFile(models.Model):
 	def __str__(self):
 		return self.path
 
+	def latest_version(self):
+		return self.fileversion_set.all().first()
+
 
 class FileTransaction(models.Model):
 	key = models.ForeignKey(SyncKey, on_delete=models.CASCADE)

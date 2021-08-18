@@ -56,22 +56,6 @@ class SyncFileFilter(django_filters.FilterSet):
 		model = SyncFile
 		fields = ['id', 'key', 'path']
 
-
-class SyncFileNode(DjangoObjectType):
-	class Meta:
-		model = SyncFile
-		filter_fields = ['path', 'id', 'key']
-		fields = ('path', 'created', 'modified', 'id', 'key', 'fileversion_set')
-		interfaces = (relay.Node, )
-
-	@classmethod
-	def get_queryset(cls, queryset, info):
-		if info.context.user.is_authenticated:
-			return queryset.filter(key__owner=info.context.user)
-
-		return queryset.none()
-
-
 class FileVersionNode(DjangoObjectType):
 	download = graphene.String()
 
@@ -85,6 +69,23 @@ class FileVersionNode(DjangoObjectType):
 	def get_queryset(cls, queryset, info):
 		if info.context.user.is_authenticated:
 			return queryset.filter(sync_file__key__owner=info.context.user)
+
+		return queryset.none()
+
+
+class SyncFileNode(DjangoObjectType):
+	latest_version = graphene.Field(FileVersionNode)
+
+	class Meta:
+		model = SyncFile
+		filter_fields = ['path', 'id', 'key']
+		fields = ('path', 'created', 'modified', 'id', 'key', 'fileversion_set')
+		interfaces = (relay.Node, )
+
+	@classmethod
+	def get_queryset(cls, queryset, info):
+		if info.context.user.is_authenticated:
+			return queryset.filter(key__owner=info.context.user)
 
 		return queryset.none()
 
