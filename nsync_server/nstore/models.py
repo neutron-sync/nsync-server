@@ -78,4 +78,5 @@ class FileVersion(models.Model):
 
 	@property
 	def download(self):
-		return self.efile.url
+		if self.efile:
+			return self.efile.url
