@@ -27,8 +27,12 @@ class SaveVersionForm(forms.Form):
 			file = SyncFile(key=key, path=self.cleaned_data['path'])
 			file.save()
 
+		uhash = self.cleaned_data['uhash']
+		if not uhash:
+			uhash = None
+
 		version = FileVersion(
-			uhash = self.cleaned_data['uhash'],
+			uhash = uhash,
 			permissions = self.cleaned_data['permissions'],
 			is_dir = self.cleaned_data['fileType'] == 'dir',
 			sync_file = file,
