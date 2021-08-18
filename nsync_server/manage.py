@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    ppath = os.environ.get('PYTHONPATH')
+    ppath = os.environ.get('PYTHONPATH', '')
     if os.getcwd() not in ppath:
         if ppath:
             os.environ['PYTHONPATH'] = ppath + ':' + os.getcwd()
