@@ -27,6 +27,6 @@ build-backend = "pdm.pep517.api"
 
 [tool.pdm.scripts]
 _.env_file = ".env"
-manage = "python nsync_server/manage.py"
+manage = "python manage.py"
 req = "pdm export -o requirements.txt --without-hashes --prod"
 format = "yapf -rpi -vv ."
