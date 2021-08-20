@@ -20,4 +20,3 @@ class LoginForm(forms.Form):
       raise forms.ValidationError('Invalid Password', code='invalid')
 
     raise forms.ValidationError('Invalid Username', code='invalid')
-

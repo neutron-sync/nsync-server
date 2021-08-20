@@ -9,4 +9,3 @@ from nsync_server.account.models import User
 class UserAdmin(UserAdmin):
   list_display = ('username', 'email', 'name', 'is_active', 'is_staff', 'is_superuser', 'last_login')
   list_filter = ('last_login', 'is_staff')
-

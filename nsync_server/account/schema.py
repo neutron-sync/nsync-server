@@ -6,7 +6,6 @@ from graphene_django.types import DjangoObjectType, ErrorType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphene_django.forms.mutation import DjangoFormMutation
 
-
 from nsync_server.account.models import User
 from nsync_server.account.forms import LoginForm
 
@@ -45,9 +44,9 @@ class LoginMutation(DjangoFormMutation):
     form = cls.get_form(root, info, **input)
     if form.is_valid():
       user = authenticate(
-          info.context,
-          username=form.cleaned_data['username'],
-          password=form.cleaned_data['password'],
+        info.context,
+        username=form.cleaned_data['username'],
+        password=form.cleaned_data['password'],
       )
       login(info.context, user)
       return cls(user=user)

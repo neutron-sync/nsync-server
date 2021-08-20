@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from nsync_server.nstore.models import SyncKey, SyncFile, FileTransaction, FileVersion
 
+
 @admin.register(SyncKey)
 class KeyAdmin(admin.ModelAdmin):
   list_display = ('name', 'owner', 'created')
@@ -12,24 +13,24 @@ class KeyAdmin(admin.ModelAdmin):
 
 
 class VersionInline(admin.TabularInline):
-   model = FileVersion
-   raw_id_fields = ('transaction', 'sync_file')
+  model = FileVersion
+  raw_id_fields = ('transaction', 'sync_file')
 
 
 @admin.register(SyncFile)
 class FileAdmin(admin.ModelAdmin):
-	list_display = ('path', 'key', 'created', 'modified')
-	date_hierarchy = 'modified'
-	search_fields = ('path', 'key__name')
+  list_display = ('path', 'key', 'created', 'modified')
+  date_hierarchy = 'modified'
+  search_fields = ('path', 'key__name')
 
-	raw_id_fields = ('key',)
+  raw_id_fields = ('key',)
 
-	inlines = (VersionInline,)
+  inlines = (VersionInline,)
 
 
 @admin.register(FileTransaction)
 class TransactionAdmin(admin.ModelAdmin):
-	list_display = ('key', 'created')
-	date_hierarchy = 'created'
-	inlines = (VersionInline,)
-	raw_id_fields = ('key',)
+  list_display = ('key', 'created')
+  date_hierarchy = 'created'
+  inlines = (VersionInline,)
+  raw_id_fields = ('key',)
