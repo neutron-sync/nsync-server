@@ -219,9 +219,14 @@ version = "5.3.0"
 requires_python = ">=3.5,<4.0"
 summary = "Radically simplified static file serving for WSGI applications"
 
+[[package]]
+name = "yapf"
+version = "0.31.0"
+summary = "A formatter for Python code."
+
 [metadata]
 lock_version = "3.1"
-content_hash = "sha256:6be760875512d10176e6bb6f3da7532f3dbc30c32ef7c9fbd85bab901b78f176"
+content_hash = "sha256:6e4208fcb3cdc2586966906c1139c01e471d9b1c26749f9a11e099af50065c01"
 
 [metadata.files]
 "aniso8601 7.0.0" = [
@@ -362,4 +367,8 @@ content_hash = "sha256:6be760875512d10176e6bb6f3da7532f3dbc30c32ef7c9fbd85bab901
 "whitenoise 5.3.0" = [
     {file = "whitenoise-5.3.0-py2.py3-none-any.whl", hash = "sha256:d963ef25639d1417e8a247be36e6aedd8c7c6f0a08adcb5a89146980a96b577c"},
     {file = "whitenoise-5.3.0.tar.gz", hash = "sha256:d234b871b52271ae7ed6d9da47ffe857c76568f11dd30e28e18c5869dbd11e12"},
+]
+"yapf 0.31.0" = [
+    {file = "yapf-0.31.0-py2.py3-none-any.whl", hash = "sha256:e3a234ba8455fe201eaa649cdac872d590089a18b661e39bbac7020978dd9c2e"},
+    {file = "yapf-0.31.0.tar.gz", hash = "sha256:408fb9a2b254c302f49db83c59f9aa0b4b0fd0ec25be3a5c51181327922ff63d"},
 ]

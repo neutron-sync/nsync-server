@@ -21,8 +21,10 @@ dynamic = ["classifiers"]
 license = {text = "MIT"}
 
 [project.urls]
-homepage = ""
+homepage = "https://github.com/neutron-sync/nsync-server"
 
+
+[project.optional-dependencies]
 [build-system]
 requires = ["pdm-pep517"]
 build-backend = "pdm.pep517.api"
@@ -32,3 +34,9 @@ _.env_file = ".env"
 manage = "python manage.py"
 req = "pdm export -o requirements.txt --without-hashes --prod"
 format = "yapf -rpi -vv ."
+check_format = "yapf -rpd ."
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "yapf~=0.31",
+]
