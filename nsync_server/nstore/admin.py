@@ -30,7 +30,7 @@ class FileAdmin(admin.ModelAdmin):
 
 @admin.register(FileTransaction)
 class TransactionAdmin(admin.ModelAdmin):
-  list_display = ('key', 'created')
+  list_display = ('key', 'id', 'created')
   date_hierarchy = 'created'
   inlines = (VersionInline,)
   raw_id_fields = ('key',)
