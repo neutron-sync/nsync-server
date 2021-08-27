@@ -60,6 +60,7 @@ class FileVersion(models.Model):
   uhash = models.CharField(max_length=512, blank=True, null=True)
   permissions = models.PositiveSmallIntegerField(default=0o755)
   is_dir = models.BooleanField(default=False)
+  timestamp = models.DateTimeField()
 
   created = models.DateTimeField(auto_now_add=True)
 

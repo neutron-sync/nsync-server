@@ -19,6 +19,7 @@ class SaveVersionForm(forms.Form):
   path = forms.CharField()
   uhash = forms.CharField(required=False)
   permissions = forms.IntegerField()
+  timestamp = forms.DateTimeField()
   fileType = forms.CharField()
   ebody = forms.CharField(required=False, max_length=1024 * 1024 * 5, min_length=1)
 
@@ -35,6 +36,7 @@ class SaveVersionForm(forms.Form):
     version = FileVersion(
       uhash=uhash,
       permissions=self.cleaned_data['permissions'],
+      timestamp=self.cleaned_data['timestamp'],
       is_dir=self.cleaned_data['fileType'] == 'dir',
       sync_file=file,
       transaction=transaction,
