@@ -45,6 +45,12 @@ For testing: `pdm run manage runserver`
 
 In production: `gunicorn nsync_server.nsync.wsgi:application`
 
+## Configuring the CLI Client
+
+Adjust your config file (`~/.config/nsync/config.json`)
+
+`"server_url": "https://your-domain.com",`
+
 ## Further Setup
 
 It is recommended to run this service behind an HTTP load balancer like Nginx. The files required to deploy this service with the Build Pack standard are included. Services like [Heroku](https://www.heroku.com/) and [Digital Ocean](https://www.digitalocean.com/) support the Build Pack standard for deployment.
