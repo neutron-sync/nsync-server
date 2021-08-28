@@ -45,7 +45,7 @@ For testing: `pdm run manage runserver`
 
 In production: `gunicorn nsync_server.nsync.wsgi:application`
 
-## Configuring the CLI Client
+## Configure the CLI Client
 
 Adjust your config file (`~/.config/nsync/config.json`)
 
