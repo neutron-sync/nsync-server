@@ -30,6 +30,12 @@ DEBUG = False
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
 
 # Application definition
+EXTRA_APPS = os.environ.get('EXTRA_APPS', '')
+if EXTRA_APPS:
+  EXTRA_APPS = EXTRA_APPS.split(',')
+
+else:
+  EXTRA_APPS = []
 
 INSTALLED_APPS = [
   'django.contrib.admin',
@@ -42,7 +48,7 @@ INSTALLED_APPS = [
   'django_filters',
   'nsync_server.account',
   'nsync_server.nstore',
-]
+] + EXTRA_APPS
 
 MIDDLEWARE = [
   'django.middleware.security.SecurityMiddleware',
@@ -55,7 +61,7 @@ MIDDLEWARE = [
   'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'nsync_server.nsync.urls'
+ROOT_URLCONF = os.environ.get('URLCONF', 'nsync_server.nsync.urls')
 
 TEMPLATES = [
   {
