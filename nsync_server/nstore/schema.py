@@ -1,3 +1,6 @@
+import json
+
+from django.core.cache import cache
 from django.utils import timezone
 
 import django_filters
@@ -7,8 +10,11 @@ from graphene_django.types import DjangoObjectType, ErrorType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphene_django.forms.mutation import DjangoModelFormMutation, DjangoFormMutation
 
+from haikunator import Haikunator
+
+from nsync_server.nsync.graphene import AuthMutation
 from nsync_server.nstore.models import SyncKey, SyncFile, FileVersion, FileTransaction
-from nsync_server.nstore.forms import AddKeyForm, SaveVersionForm, StartKeyExchangeForm
+from nsync_server.nstore.forms import AddKeyForm, SaveVersionForm, StartKeyExchangeForm, CompleteKeyExchangeForm
 
 
 class SyncKeyNode(DjangoObjectType):
@@ -93,7 +99,7 @@ class SyncFileNode(DjangoObjectType):
     return queryset.none()
 
 
-class AddKeyMutation(DjangoModelFormMutation):
+class AddKeyMutation(AuthMutation, DjangoModelFormMutation):
 
   class Meta:
     form_class = AddKeyForm
@@ -108,7 +114,7 @@ class AddKeyMutation(DjangoModelFormMutation):
     return cls(errors=[], **kwargs)
 
 
-class SaveVersionMutation(DjangoFormMutation):
+class SaveVersionMutation(AuthMutation, DjangoFormMutation):
   transaction = graphene.Int()
 
   class Meta:
@@ -129,7 +135,7 @@ class SaveVersionMutation(DjangoFormMutation):
     return cls(errors=[], transaction=version.transaction.id, **form.cleaned_data)
 
 
-class StartKeyExchangeForm(DjangoFormMutation):
+class StartKeyExchangeMutation(AuthMutation, DjangoFormMutation):
   phrase = graphene.String()
 
   class Meta:
@@ -137,7 +143,51 @@ class StartKeyExchangeForm(DjangoFormMutation):
 
   @classmethod
   def perform_mutate(cls, form, info):
+    haikunator = Haikunator()
+
+    data = json.dumps({
+      'key': form.cleaned_data['key'],
+      'salt': form.cleaned_data['salt'],
+      'etext': form.cleaned_data['etext'],
+      'user': info.context.user.id,
+    })
+    while 1:
+      phrase = haikunator.haikunate()
+      value = cache.get(f'exchange-{phrase}')
+      if value is None:
+        break
+
+    cache.set(f'exchange-{phrase}', data, 15 * 60)
     return cls(errors=[], phrase=phrase, **form.cleaned_data)
+
+
+class CompleteKeyExchangeMutation(AuthMutation, DjangoFormMutation):
+  key = graphene.String()
+  salt = graphene.String()
+  etext = graphene.String()
+
+  class Meta:
+    form_class = CompleteKeyExchangeForm
+
+  @classmethod
+  def perform_mutate(cls, form, info):
+    ckey = 'exchange-{}'.format(form.cleaned_data['phrase'])
+    value = cache.get(ckey)
+    key = ''
+    salt = ''
+    etext = ''
+
+    if value:
+      data = json.loads(value)
+      user = data['user']
+
+      if user == info.context.user.id:
+        key = data['key']
+        salt = data['salt']
+        etext = data['etext']
+        cache.delete(ckey)
+
+    return cls(errors=[], key=key, salt=salt, etext=etext, **form.cleaned_data)
 
 
 class Query:
@@ -150,3 +200,5 @@ class Query:
 class Mutation:
   add_key = AddKeyMutation.Field()
   save_version = SaveVersionMutation.Field()
+  start_key_exchange = StartKeyExchangeMutation.Field()
+  complete_key_exchange = CompleteKeyExchangeMutation.Field()

@@ -57,3 +57,7 @@ class StartKeyExchangeForm(forms.Form):
   key = forms.CharField()
   salt = forms.CharField()
   etext = forms.CharField()
+
+
+class CompleteKeyExchangeForm(forms.Form):
+  phrase = forms.CharField()
