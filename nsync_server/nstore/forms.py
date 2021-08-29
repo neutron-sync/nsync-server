@@ -51,3 +51,9 @@ class SaveVersionForm(forms.Form):
     file.modified = timezone.now()
     file.save()
     return version
+
+
+class StartKeyExchangeForm(forms.Form):
+  key = forms.CharField()
+  salt = forms.CharField()
+  etext = forms.CharField()

@@ -17,6 +17,7 @@ The server provides the following functions that are used by the CLI client:
 - Python 3
 - [PDM](https://pdm.fming.dev/)
 - PostgreSQL Database
+- Redis Server
 - S3 compatible storage (optional)
 
 ```
@@ -47,6 +48,7 @@ echo AWS_STORAGE_BUCKET_NAME=<YOUR BUCKET> >> .env
 Additional ENV Vars:
 
 - `DATABASE_URL`: Override default database URL
+- `REDIS_URL`: Override default Redis database
 
 ## Running The Service
 

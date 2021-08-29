@@ -8,7 +8,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphene_django.forms.mutation import DjangoModelFormMutation, DjangoFormMutation
 
 from nsync_server.nstore.models import SyncKey, SyncFile, FileVersion, FileTransaction
-from nsync_server.nstore.forms import AddKeyForm, SaveVersionForm
+from nsync_server.nstore.forms import AddKeyForm, SaveVersionForm, StartKeyExchangeForm
 
 
 class SyncKeyNode(DjangoObjectType):
@@ -127,6 +127,17 @@ class SaveVersionMutation(DjangoFormMutation):
 
     version = form.save_file(key, info.context.transaction)
     return cls(errors=[], transaction=version.transaction.id, **form.cleaned_data)
+
+
+class StartKeyExchangeForm(DjangoFormMutation):
+  phrase = graphene.String()
+
+  class Meta:
+    form_class = StartKeyExchangeForm
+
+  @classmethod
+  def perform_mutate(cls, form, info):
+    return cls(errors=[], phrase=phrase, **form.cleaned_data)
 
 
 class Query:
