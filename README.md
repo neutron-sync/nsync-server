@@ -56,7 +56,7 @@ Adjust your config file (`~/.config/nsync/config.json`)
 
 ## Administration
 
-The open source version of the Neutron Sync server does not come with a custom UI. However, the Django admin located at `/admin/` should provide you with enough functionality for you and your users to maintain and manage thier accounts.
+The open source version of the Neutron Sync server does not come with a custom UI. However, the Django admin located at `/admin/` should provide you with enough functionality for you and your users to maintain and manage their accounts.
 
 ## Further Setup
 
