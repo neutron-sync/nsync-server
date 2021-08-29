@@ -11,6 +11,7 @@ This is the web service portion of Neutron Sync. It is a Django app and can be d
 - Python 3
 - [PDM](https://pdm.fming.dev/)
 - PostgreSQL Database
+- S3 compatible storage (optional)
 
 ```
 git clone git@github.com:neutron-sync/nsync-server.git
@@ -29,6 +30,8 @@ pdm run manage createsuperuser
 
 # ENV setup
 echo ALLOWED_HOSTS=<YOUR-DOMAIN.COM> >> .env
+
+# Storage Bucket Setup (optional)
 echo AWS_ACCESS_KEY_ID=<YOUR KEY> >> .env
 echo AWS_S3_REGION_NAME=<YOUR REGION> >> .env
 echo AWS_SECRET_ACCESS_KEY=<YOUR SECRET> >> .env
