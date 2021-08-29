@@ -146,7 +146,6 @@ SESSION_SAVE_EVERY_REQUEST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
-REDIS_SSL_CERT_CHECK_OFF = os.environ.get('REDIS_SSL_CERT_CHECK_OFF', False)
 
 CACHES = {
   "default": {
@@ -157,6 +156,3 @@ CACHES = {
     }
   }
 }
-
-# if REDIS_SSL_CERT_CHECK_OFF:
-#   CACHES["default"]["OPTIONS"]["CONNECTION_POOL_KWARGS"] = {"ssl_cert_reqs": None}
