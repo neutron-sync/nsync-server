@@ -2,7 +2,7 @@
 
 ### *Encrypted Dot File sync service*
 
-This is the web service portion of Neutron Sync. It is a Django app and can be deployed just like any other Django web service.
+This is the web service portion of Neutron Sync. It is a Django app and can be deployed just like any other typical Django web service.
 
 ## Setup Service
 
@@ -56,4 +56,4 @@ Adjust your config file (`~/.config/nsync/config.json`)
 
 ## Further Setup
 
-It is recommended to run this service behind an HTTP load balancer like Nginx. The files required to deploy this service with the Build Pack standard are included. Services like [Heroku](https://www.heroku.com/) and [Digital Ocean](https://www.digitalocean.com/) support the Build Pack standard for deployment.
+It is recommended to run this service behind an HTTP load balancer like Nginx. The files required to deploy this service with the [Build Pack](https://buildpacks.io/) standard are included. Services like [Heroku](https://www.heroku.com/) and [Digital Ocean](https://www.digitalocean.com/) support the Build Pack standard for deployment.
