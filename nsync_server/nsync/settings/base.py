@@ -158,5 +158,5 @@ CACHES = {
   }
 }
 
-if REDIS_SSL_CERT_CHECK_OFF:
-  CACHES["default"]["OPTIONS"]["CONNECTION_POOL_KWARGS"] = {"ssl_cert_reqs": None}
+# if REDIS_SSL_CERT_CHECK_OFF:
+#   CACHES["default"]["OPTIONS"]["CONNECTION_POOL_KWARGS"] = {"ssl_cert_reqs": None}
