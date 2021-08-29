@@ -4,6 +4,12 @@
 
 This is the web service portion of Neutron Sync. It is a Django app and can be deployed just like any other typical Django web service.
 
+The server provides the following functions that are used by the CLI client:
+
+- User management
+- GraphQL API
+- Remote file storage
+
 ## Setup Service
 
 **Requires:**
