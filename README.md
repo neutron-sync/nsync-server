@@ -54,6 +54,10 @@ Adjust your config file (`~/.config/nsync/config.json`)
 
 `"server_url": "https://your-domain.com",`
 
+## Administration
+
+The open source version of the Neutron Sync server does not come with a custom UI. However, the Django admin located at `/admin/` should provide you with enough functionality for you and your users to maintain and manage thier accounts.
+
 ## Further Setup
 
 It is recommended to run this service behind an HTTP load balancer like Nginx. The files required to deploy this service with the [Build Pack](https://buildpacks.io/) standard are included. Services like [Heroku](https://www.heroku.com/) and [Digital Ocean](https://www.digitalocean.com/) support the Build Pack standard for deployment.
