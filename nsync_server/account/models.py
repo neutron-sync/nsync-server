@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from django.utils import timezone
 
 class User(AbstractUser):
 
@@ -22,3 +22,21 @@ class User(AbstractUser):
       return self.email
 
     return self.username
+
+  @property
+  def has_credit(self):
+    if hasattr(self, 'credit_set'):
+      now = timezone.now()
+      credit = self.credit_set.filter(expiration__gte=now).first()
+      if credit:
+        return True
+
+      return False
+
+    return True
+
+  @property
+  def latest_credit(self):
+    if hasattr(self, 'credit_set'):
+      now = timezone.now()
+      return self.credit_set.filter(expiration__gte=now).first()

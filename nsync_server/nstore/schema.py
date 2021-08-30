@@ -27,7 +27,7 @@ class SyncKeyNode(DjangoObjectType):
 
   @classmethod
   def get_queryset(cls, queryset, info):
-    if info.context.user.is_authenticated:
+    if info.context.user.is_authenticated and info.context.user.has_credit:
       return queryset.filter(owner=info.context.user)
 
     return queryset.none()
@@ -51,7 +51,7 @@ class FileTransactionNode(DjangoObjectType):
 
   @classmethod
   def get_queryset(cls, queryset, info):
-    if info.context.user.is_authenticated:
+    if info.context.user.is_authenticated and info.context.user.has_credit:
       return queryset.filter(key__owner=info.context.user)
 
     return queryset.none()
@@ -76,7 +76,7 @@ class FileVersionNode(DjangoObjectType):
 
   @classmethod
   def get_queryset(cls, queryset, info):
-    if info.context.user.is_authenticated:
+    if info.context.user.is_authenticated and info.context.user.has_credit:
       return queryset.filter(sync_file__key__owner=info.context.user)
 
     return queryset.none()
@@ -93,7 +93,7 @@ class SyncFileNode(DjangoObjectType):
 
   @classmethod
   def get_queryset(cls, queryset, info):
-    if info.context.user.is_authenticated:
+    if info.context.user.is_authenticated and info.context.user.has_credit:
       return queryset.filter(key__owner=info.context.user)
 
     return queryset.none()
