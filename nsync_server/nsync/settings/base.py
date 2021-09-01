@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import importlib
 import os
 from pathlib import Path
 
@@ -159,3 +160,15 @@ CACHES = {
 
 LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = '/account/'
+
+def import_extra_settings(mod):
+  mdl = importlib.import_module(mod)
+  names = [x for x in mdl.__dict__ if not x.startswith("_")]
+  names = [n for n in names if n.upper() == n]
+
+  globals().update({k: getattr(mdl, k) for k in names})
+
+
+EXTRA_SETTINGS = os.environ.get('EXTRA_SETTINGS')
+if EXTRA_SETTINGS:
+  import_extra_settings(EXTRA_SETTINGS)
