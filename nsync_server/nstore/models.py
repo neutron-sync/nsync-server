@@ -84,7 +84,7 @@ class FileVersion(models.Model):
 
   @property
   def linux_perm(self):
-    octal = oct(self.permissions)
+    octal = oct(self.permissions)[-3:]
     result = ""
     value_letters = [(4,"r"),(2,"w"),(1,"x")]
 
