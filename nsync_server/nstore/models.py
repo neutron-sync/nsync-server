@@ -40,6 +40,13 @@ class SyncFile(models.Model):
   def latest_version(self):
     return self.fileversion_set.all().first()
 
+  @property
+  def latest(self):
+    if not hasattr(self, '_latest'):
+      self._latest = self.latest_version
+
+    return self._latest
+
 
 class FileTransaction(models.Model):
   key = models.ForeignKey(SyncKey, on_delete=models.CASCADE)
@@ -76,6 +83,13 @@ class FileVersion(models.Model):
 
   def __str__(self):
     return f'{self.sync_file.path} {self.uhash}'
+
+  @property
+  def short_uhash(self):
+    if self.uhash:
+      return self.uhash[:7]
+
+    return ''
 
   @property
   def download(self):
