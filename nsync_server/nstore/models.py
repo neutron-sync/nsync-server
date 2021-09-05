@@ -81,3 +81,20 @@ class FileVersion(models.Model):
   def download(self):
     if self.efile:
       return self.efile.url
+
+  @property
+  def linux_perm(self):
+    octal = oct(self.permissions)
+    result = ""
+    value_letters = [(4,"r"),(2,"w"),(1,"x")]
+
+    for digit in [int(n) for n in str(octal)]:
+      for value, letter in value_letters:
+        if digit >= value:
+          result += letter
+          digit -= value
+
+        else:
+          result += '-'
+
+    return result
