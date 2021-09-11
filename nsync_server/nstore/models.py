@@ -61,6 +61,10 @@ class FileTransaction(models.Model):
   def __str__(self):
     return '{} {}'.format(self.key.name, self.created.isoformat())
 
+  @property
+  def int_id(self):
+    return self.id
+
 
 class FileVersion(models.Model):
   efile = models.FileField(upload_to='sync/%Y/%m/%d/', blank=True, null=True)

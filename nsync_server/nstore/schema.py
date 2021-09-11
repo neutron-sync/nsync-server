@@ -6,6 +6,7 @@ from django.utils import timezone
 import django_filters
 import graphene
 from graphene import relay
+from graphene.types.scalars import Scalar
 from graphene_django.types import DjangoObjectType, ErrorType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphene_django.forms.mutation import DjangoModelFormMutation, DjangoFormMutation
@@ -15,6 +16,27 @@ from haikunator import Haikunator
 from nsync_server.nsync.graphene import AuthMutation
 from nsync_server.nstore.models import SyncKey, SyncFile, FileVersion, FileTransaction
 from nsync_server.nstore.forms import AddKeyForm, SaveVersionForm, StartKeyExchangeForm, CompleteKeyExchangeForm
+
+
+class BigInt(Scalar):
+  @staticmethod
+  def coerce_int(value):
+    try:
+      num = int(value)
+    except ValueError:
+      try:
+        num = int(float(value))
+      except ValueError:
+        return None
+    return num
+
+  serialize = coerce_int
+  parse_value = coerce_int
+
+  @staticmethod
+  def parse_literal(ast):
+    if isinstance(ast, IntValueNode):
+      return int(ast.value)
 
 
 class SyncKeyNode(DjangoObjectType):
@@ -42,6 +64,7 @@ class FileTransactionFilter(django_filters.FilterSet):
 
 
 class FileTransactionNode(DjangoObjectType):
+  int_id = BigInt()
 
   class Meta:
     model = FileTransaction
