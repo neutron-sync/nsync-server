@@ -12,6 +12,7 @@ from nsync_server.account.forms import LoginForm
 
 class UserType(DjangoObjectType):
   sessionExpiration = graphene.Int()
+  has_credit = graphene.Boolean()
 
   class Meta:
     model = User
