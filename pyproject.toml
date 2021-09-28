@@ -1,12 +1,11 @@
 [project]
 name = "nsync-server"
-version = "0.2.0"
+version = "0.3.0"
 description = ""
 authors = [
     {name = "Paul Bailey", email = "paul@neutron.studio"},
 ]
 dependencies = [
-    "django~=3.2",
     "dj-database-url~=0.5",
     "graphene-django~=2.15",
     "psycopg2-binary~=2.9",
@@ -17,6 +16,8 @@ dependencies = [
     "boto3~=1.18",
     "haikunator~=2.1",
     "django-redis~=5.0",
+    "django~=3.2",
+    "sqlparse~=0.4",
 ]
 requires-python = ">=3.7"
 dynamic = ["classifiers"]
