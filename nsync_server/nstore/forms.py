@@ -61,3 +61,15 @@ class StartKeyExchangeForm(forms.Form):
 
 class CompleteKeyExchangeForm(forms.Form):
   phrase = forms.CharField()
+
+
+class DeleteTransaction(forms.Form):
+  transaction_id = forms.IntegerField()
+
+
+class DeleteVersion(forms.Form):
+  version_id = forms.IntegerField()
+
+
+class DeleteFile(forms.Form):
+  file_id = forms.IntegerField()

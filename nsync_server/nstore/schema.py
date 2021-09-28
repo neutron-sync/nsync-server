@@ -65,7 +65,7 @@ class FileTransactionFilter(django_filters.FilterSet):
 
 
 class FileTransactionNode(DjangoObjectType):
-  int_id = BigInt()
+  raw_id = BigInt()
 
   class Meta:
     model = FileTransaction
@@ -91,6 +91,7 @@ class SyncFileFilter(django_filters.FilterSet):
 
 class FileVersionNode(DjangoObjectType):
   download = graphene.String()
+  raw_id = BigInt()
 
   class Meta:
     model = FileVersion
@@ -108,6 +109,7 @@ class FileVersionNode(DjangoObjectType):
 
 class SyncFileNode(DjangoObjectType):
   latest_version = graphene.Field(FileVersionNode)
+  raw_id = BigInt()
 
   class Meta:
     model = SyncFile

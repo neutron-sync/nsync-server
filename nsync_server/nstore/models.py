@@ -48,6 +48,10 @@ class SyncFile(models.Model):
 
     return self._latest
 
+  @property
+  def raw_id(self):
+    return self.id
+
   def wipe(self):
     for v in self.fileversion_set.exclude(efile__isnull=True):
       v.efile.delete(save=False)
@@ -74,7 +78,7 @@ class FileTransaction(models.Model):
     return '{} {}'.format(self.key, self.id)
 
   @property
-  def int_id(self):
+  def raw_id(self):
     return self.id
 
   @property
@@ -141,6 +145,10 @@ class FileVersion(models.Model):
           result += '-'
 
     return result
+
+  @property
+  def raw_id(self):
+    return self.id
 
   def wipe(self):
     if self.efile:
