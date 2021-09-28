@@ -19,6 +19,7 @@ from nsync_server.nstore.forms import AddKeyForm, SaveVersionForm, StartKeyExcha
 
 
 class BigInt(Scalar):
+
   @staticmethod
   def coerce_int(value):
     try:

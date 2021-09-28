@@ -151,13 +151,14 @@ CACHES = {
     "BACKEND": "django_redis.cache.RedisCache",
     "LOCATION": REDIS_URL,
     "OPTIONS": {
-        "CLIENT_CLASS": "django_redis.client.DefaultClient",
+      "CLIENT_CLASS": "django_redis.client.DefaultClient",
     }
   }
 }
 
 LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = '/account/'
+
 
 def import_extra_settings(mod):
   mdl = importlib.import_module(mod)

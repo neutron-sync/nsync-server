@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Count
 
 
 class SyncKey(models.Model):
@@ -16,7 +17,7 @@ class SyncKey(models.Model):
     ]
 
   def __str__(self):
-    return self.name
+    return f"{self.owner}-{self.name}"
 
 
 class SyncFile(models.Model):
@@ -47,6 +48,17 @@ class SyncFile(models.Model):
 
     return self._latest
 
+  def wipe(self):
+    for v in self.fileversion_set.exclude(efile__isnull=True):
+      v.efile.delete(save=False)
+
+    self.fileversion_set.all().delete()
+    self.delete()
+
+  @classmethod
+  def clear_empty(cls, key):
+    return cls.objects.annotate(numvers=Count('fileversion')).filter(key=key, numvers=0).delete()
+
 
 class FileTransaction(models.Model):
   key = models.ForeignKey(SyncKey, on_delete=models.CASCADE)
@@ -59,11 +71,24 @@ class FileTransaction(models.Model):
     ]
 
   def __str__(self):
-    return '{} {}'.format(self.key.name, self.created.isoformat())
+    return '{} {}'.format(self.key, self.id)
 
   @property
   def int_id(self):
     return self.id
+
+  @property
+  def file_count(self):
+    return self.fileversion_set.count()
+
+  def wipe(self):
+    for v in self.fileversion_set.all():
+      if v.efile:
+        v.efile.delete(save=False)
+
+      v.wipe()
+
+    self.delete()
 
 
 class FileVersion(models.Model):
@@ -104,7 +129,7 @@ class FileVersion(models.Model):
   def linux_perm(self):
     octal = oct(self.permissions)[-3:]
     result = ""
-    value_letters = [(4,"r"),(2,"w"),(1,"x")]
+    value_letters = [(4, "r"), (2, "w"), (1, "x")]
 
     for digit in [int(n) for n in str(octal)]:
       for value, letter in value_letters:
@@ -116,3 +141,13 @@ class FileVersion(models.Model):
           result += '-'
 
     return result
+
+  def wipe(self):
+    if self.efile:
+      self.efile.delete(save=False)
+
+    file = self.sync_file
+    self.delete()
+
+    if file.fileversion_set.count() == 0:
+      file.delete()
