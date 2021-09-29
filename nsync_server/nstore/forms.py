@@ -66,8 +66,9 @@ class CompleteKeyExchangeForm(forms.Form):
 class DeleteItemForm(forms.Form):
   DELETE_TYPES = (
     ('file', 'file'),
+    ('key', 'key'),
     ('transaction', 'transaction'),
     ('version', 'version'),
   )
   item_type = forms.ChoiceField(choices=DELETE_TYPES)
-  item_id = forms.IntegerField()
+  item_id = forms.CharField()

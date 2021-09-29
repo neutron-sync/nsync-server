@@ -5,11 +5,22 @@ from django.utils.safestring import mark_safe
 from nsync_server.nstore.models import SyncKey, SyncFile, FileTransaction, FileVersion
 
 
+@admin.action(description='Clear all versions, files, and transactions')
+def wipe_key(modeladmin, request, queryset):
+  count = queryset.count()
+
+  for key in queryset:
+    key.wipe()
+
+  messages.success(request, f'{count} Keys Wiped')
+
+
 @admin.register(SyncKey)
 class KeyAdmin(admin.ModelAdmin):
   list_display = ('name', 'owner', 'created')
   date_hierarchy = 'created'
   search_fields = ('name', 'owner__username')
+  actions = [wipe_key]
 
   raw_id_fields = ('owner',)
 

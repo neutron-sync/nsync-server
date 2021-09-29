@@ -19,6 +19,13 @@ class SyncKey(models.Model):
   def __str__(self):
     return f"{self.owner}-{self.name}"
 
+  def wipe(self):
+    for file in SyncFile.objects.filter(key=self):
+      file.wipe()
+
+    FileTransaction.objects.filter(key=self).delete()
+    self.delete()
+
 
 class SyncFile(models.Model):
   path = models.CharField(max_length=1024)
