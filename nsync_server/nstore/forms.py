@@ -63,13 +63,11 @@ class CompleteKeyExchangeForm(forms.Form):
   phrase = forms.CharField()
 
 
-class DeleteTransaction(forms.Form):
-  transaction_id = forms.IntegerField()
-
-
-class DeleteVersion(forms.Form):
-  version_id = forms.IntegerField()
-
-
-class DeleteFile(forms.Form):
-  file_id = forms.IntegerField()
+class DeleteItemForm(forms.Form):
+  DELETE_TYPES = (
+    ('file', 'file'),
+    ('transaction', 'transaction'),
+    ('version', 'version'),
+  )
+  item_type = forms.ChoiceField(choices=DELETE_TYPES)
+  item_id = forms.IntegerField()

@@ -15,7 +15,7 @@ from haikunator import Haikunator
 
 from nsync_server.nsync.graphene import AuthMutation
 from nsync_server.nstore.models import SyncKey, SyncFile, FileVersion, FileTransaction
-from nsync_server.nstore.forms import AddKeyForm, SaveVersionForm, StartKeyExchangeForm, CompleteKeyExchangeForm
+from nsync_server.nstore.forms import AddKeyForm, SaveVersionForm, StartKeyExchangeForm, CompleteKeyExchangeForm, DeleteItemForm
 
 
 class BigInt(Scalar):
@@ -161,6 +161,34 @@ class SaveVersionMutation(AuthMutation, DjangoFormMutation):
     return cls(errors=[], transaction=version.transaction.id, **form.cleaned_data)
 
 
+class DeleteItemMutation(AuthMutation, DjangoFormMutation):
+  success = graphene.Boolean()
+
+  class Meta:
+    form_class = DeleteItemForm
+
+  @classmethod
+  def perform_mutate(cls, form, info):
+    qs = None
+    if form.cleaned_data['item_type'] == 'file':
+      qs = SyncFile.objects.filter(key__owner=info.context.user)
+
+    elif form.cleaned_data['item_type'] == 'transaction':
+      qs = FileTransaction.objects.filter(key__owner=info.context.user)
+
+    elif form.cleaned_data['item_type'] == 'version':
+      qs = FileVersion.objects.filter(sync_file__key__owner=info.context.user)
+
+    qs = qs.filter(id=form.cleaned_data['item_id'])
+    if qs and qs.count():
+      for obj in qs:
+        obj.wipe()
+
+      return cls(errors=[], success=True, **form.cleaned_data)
+
+    return cls(errors=[], success=False, **form.cleaned_data)
+
+
 class StartKeyExchangeMutation(AuthMutation, DjangoFormMutation):
   phrase = graphene.String()
 
@@ -226,5 +254,6 @@ class Query:
 class Mutation:
   add_key = AddKeyMutation.Field()
   save_version = SaveVersionMutation.Field()
+  delete_item = DeleteItemMutation.Field()
   start_key_exchange = StartKeyExchangeMutation.Field()
   complete_key_exchange = CompleteKeyExchangeMutation.Field()
