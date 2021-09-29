@@ -4,7 +4,7 @@ from django import forms
 from django.core.files.base import ContentFile
 from django.utils import timezone
 
-from nsync_server.nstore.models import SyncKey, SyncFile, FileVersion
+from nsync_server.nstore.models import SyncKey, SyncFile, FileVersion, FileTransaction
 
 
 class AddKeyForm(forms.ModelForm):
@@ -72,3 +72,25 @@ class DeleteItemForm(forms.Form):
   )
   item_type = forms.ChoiceField(choices=DELETE_TYPES)
   item_id = forms.CharField()
+
+  def do_delete(self, user):
+    qs = None
+    if self.cleaned_data['item_type'] == 'file':
+      qs = SyncFile.objects.filter(key__owner=user, id=self.cleaned_data['item_id'])
+
+    elif self.cleaned_data['item_type'] == 'transaction':
+      qs = FileTransaction.objects.filter(key__owner=user, id=self.cleaned_data['item_id'])
+
+    elif self.cleaned_data['item_type'] == 'version':
+      qs = FileVersion.objects.filter(sync_file__key__owner=user, id=self.cleaned_data['item_id'])
+
+    elif self.cleaned_data['item_type'] == 'key':
+      qs = SyncKey.objects.filter(owner=user, name=self.cleaned_data['item_id'])
+
+    if qs and qs.count():
+      for obj in qs:
+        obj.wipe()
+
+      return True
+
+    return False

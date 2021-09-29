@@ -169,26 +169,7 @@ class DeleteItemMutation(AuthMutation, DjangoFormMutation):
 
   @classmethod
   def perform_mutate(cls, form, info):
-    qs = None
-    if form.cleaned_data['item_type'] == 'file':
-      qs = SyncFile.objects.filter(key__owner=info.context.user, id=form.cleaned_data['item_id'])
-
-    elif form.cleaned_data['item_type'] == 'transaction':
-      qs = FileTransaction.objects.filter(key__owner=info.context.user, id=form.cleaned_data['item_id'])
-
-    elif form.cleaned_data['item_type'] == 'version':
-      qs = FileVersion.objects.filter(sync_file__key__owner=info.context.user, id=form.cleaned_data['item_id'])
-
-    elif form.cleaned_data['item_type'] == 'key':
-      qs = SyncKey.objects.filter(owner=info.context.user, name=form.cleaned_data['item_id'])
-
-    if qs and qs.count():
-      for obj in qs:
-        obj.wipe()
-
-      return cls(errors=[], success=True, **form.cleaned_data)
-
-    return cls(errors=[], success=False, **form.cleaned_data)
+    return cls(errors=[], success=form.do_delete(info.context.user), **form.cleaned_data)
 
 
 class StartKeyExchangeMutation(AuthMutation, DjangoFormMutation):
