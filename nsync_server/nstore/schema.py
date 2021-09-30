@@ -92,6 +92,7 @@ class SyncFileFilter(django_filters.FilterSet):
 class FileVersionNode(DjangoObjectType):
   download = graphene.String()
   raw_id = BigInt()
+  linux_perm = graphene.String()
 
   class Meta:
     model = FileVersion
