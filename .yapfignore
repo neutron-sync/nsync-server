@@ -1,2 +1,3 @@
 */migrations/*
 __pypackages__/*
+server/__pypackages__/*
