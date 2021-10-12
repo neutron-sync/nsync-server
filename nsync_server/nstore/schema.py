@@ -96,7 +96,7 @@ class FileVersionNode(DjangoObjectType):
 
   class Meta:
     model = FileVersion
-    filter_fields = ['id', 'sync_file', 'transaction']
+    filter_fields = ['id', 'sync_file', 'transaction__lte']
     fields = ('created', 'id', 'transaction', 'uhash', 'permissions', 'timestamp', 'is_dir', 'sync_file', 'transaction')
     interfaces = (relay.Node,)
 
