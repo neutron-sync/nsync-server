@@ -99,6 +99,7 @@ class FileVersionNode(DjangoObjectType):
     filter_fields = {
       'id': ['exact'],
       'sync_file': ['exact'],
+      'sync_file__path': ['exact'],
       'transaction': ['exact', 'lte']
     }
     fields = ('created', 'id', 'transaction', 'uhash', 'permissions', 'timestamp', 'is_dir', 'sync_file', 'transaction')
