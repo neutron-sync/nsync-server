@@ -104,7 +104,7 @@ class FileTransaction(models.Model):
 
 class FileVersion(models.Model):
   efile = models.FileField(upload_to='sync/%Y/%m/%d/', blank=True, null=True)
-  uhash = models.CharField(max_length=512, blank=True, null=True, db_index=True)
+  uhash = models.CharField(max_length=512, blank=True, null=True)
   permissions = models.PositiveSmallIntegerField(default=0o755)
   is_dir = models.BooleanField(default=False)
   timestamp = models.DateTimeField()
