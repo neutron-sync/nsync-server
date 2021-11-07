@@ -14,15 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
 
 from graphene_django.views import GraphQLView
 
+import django_2fa.urls
 import nsync_server.nstore.views as nstore_views
 
 urlpatterns = [
   path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
   path("admin/nstore/fileversion/<int:vid>/wipe/", nstore_views.wipe_version),
   path('admin/', admin.site.urls),
+  path('2fa/', include(django_2fa.urls)),
 ]
