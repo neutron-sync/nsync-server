@@ -14,18 +14,18 @@ dependencies = [
 
 [[package]]
 name = "boto3"
-version = "1.19.12"
+version = "1.20.0"
 requires_python = ">= 3.6"
 summary = "The AWS SDK for Python"
 dependencies = [
-    "botocore<1.23.0,>=1.22.12",
+    "botocore<1.24.0,>=1.23.0",
     "jmespath<1.0.0,>=0.7.1",
     "s3transfer<0.6.0,>=0.5.0",
 ]
 
 [[package]]
 name = "botocore"
-version = "1.22.12"
+version = "1.23.1"
 requires_python = ">= 3.6"
 summary = "Low-level, data-driven core of boto 3."
 dependencies = [
@@ -69,11 +69,12 @@ dependencies = [
 
 [[package]]
 name = "django-2fa"
-version = "0.1.0"
+version = "0.2.0"
 requires_python = ">=3.7"
 summary = "2 Factor authenication application for Django"
 dependencies = [
     "django-fernet-encrypted-fields~=0.0",
+    "pyotp~=2.6",
 ]
 
 [[package]]
@@ -198,6 +199,11 @@ version = "2.21"
 summary = "C parser in Python"
 
 [[package]]
+name = "pyotp"
+version = "2.6.0"
+summary = "Python One Time Password Library"
+
+[[package]]
 name = "python-dateutil"
 version = "2.8.2"
 requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
@@ -298,13 +304,12 @@ content_hash = "sha256:ec0f6e7bc8977183175f6915024c464621fdbc3e9d2bc35024c3b660f
     {file = "asgiref-3.4.1-py3-none-any.whl", hash = "sha256:ffc141aa908e6f175673e7b1b3b7af4fdb0ecb738fc5c8b88f69f055c2415214"},
     {file = "asgiref-3.4.1.tar.gz", hash = "sha256:4ef1ab46b484e3c706329cedeff284a5d40824200638503f5768edb6de7d58e9"},
 ]
-"boto3 1.19.12" = [
-    {file = "boto3-1.19.12-py3-none-any.whl", hash = "sha256:b9105554477978e80fda1103ff21ecf07502080667730e45383e1d3951c87954"},
-    {file = "boto3-1.19.12.tar.gz", hash = "sha256:182a2b756a2c2180b473bc8452227062394a24e3701548be23ebc30d85976c64"},
+"boto3 1.20.0" = [
+    {file = "boto3-1.20.0-py3-none-any.whl", hash = "sha256:da7dcc85c65c4dcd02ce56481f02e4f7904b4b43c9821c8b23998b90db603874"},
+    {file = "boto3-1.20.0.tar.gz", hash = "sha256:17b942d9513f396b2e90f71131b48cdc49279c9714189bbf84a232d189a793dd"},
 ]
-"botocore 1.22.12" = [
-    {file = "botocore-1.22.12-py3-none-any.whl", hash = "sha256:1d1094fb53ebe4535d8840fbd7c14aadb65bde7ff03a65f9a4f1d76bd03e16ff"},
-    {file = "botocore-1.22.12.tar.gz", hash = "sha256:fc59b55e8c5dde64b017b2f114c25f8cce397b667e812aea7eafb4b59b49d7cb"},
+"botocore 1.23.1" = [
+    {file = "botocore-1.23.1-py3-none-any.whl", hash = "sha256:ae6c29083a5c1bddf2a2d89e3dae1a2cafb1601c95f28a2ec30109ffe2c99343"},
 ]
 "cffi 1.15.0" = [
     {file = "cffi-1.15.0-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:c2502a1a03b6312837279c8c1bd3ebedf6c12c4228ddbad40912d671ccc8a962"},
@@ -388,9 +393,9 @@ content_hash = "sha256:ec0f6e7bc8977183175f6915024c464621fdbc3e9d2bc35024c3b660f
     {file = "Django-3.2.9-py3-none-any.whl", hash = "sha256:e22c9266da3eec7827737cde57694d7db801fedac938d252bf27377cec06ed1b"},
     {file = "Django-3.2.9.tar.gz", hash = "sha256:51284300f1522ffcdb07ccbdf676a307c6678659e1284f0618e5a774127a6a08"},
 ]
-"django-2fa 0.1.0" = [
-    {file = "django_2fa-0.1.0-py3-none-any.whl", hash = "sha256:ed1e3fa4674f145273da2b224f217948e2160a8b40e294b57822fe13c4458745"},
-    {file = "django-2fa-0.1.0.tar.gz", hash = "sha256:e351bd64e8486ac1b22b035c51ae00cc516733547c739923b3540299a32c0215"},
+"django-2fa 0.2.0" = [
+    {file = "django_2fa-0.2.0-py3-none-any.whl", hash = "sha256:60186a943d67d0248ab90f952b350c279fbd1fd3cd57b5f45d0900d517921eb5"},
+    {file = "django-2fa-0.2.0.tar.gz", hash = "sha256:d85d76ba06970afac6ac469afd29f11cf00208afa62b4478921178861d06a5ac"},
 ]
 "django-fernet-encrypted-fields 0.0.2" = [
     {file = "django_fernet_encrypted_fields-0.0.2-py3-none-any.whl", hash = "sha256:190f9d411f299293d586157c7c858605f2d72b80c5602afce08e8af71b1342f4"},
@@ -480,6 +485,10 @@ content_hash = "sha256:ec0f6e7bc8977183175f6915024c464621fdbc3e9d2bc35024c3b660f
 "pycparser 2.21" = [
     {file = "pycparser-2.21-py2.py3-none-any.whl", hash = "sha256:8ee45429555515e1f6b185e78100aea234072576aa43ab53aefcae078162fca9"},
     {file = "pycparser-2.21.tar.gz", hash = "sha256:e644fdec12f7872f86c58ff790da456218b10f863970249516d60a5eaca77206"},
+]
+"pyotp 2.6.0" = [
+    {file = "pyotp-2.6.0-py2.py3-none-any.whl", hash = "sha256:9d144de0f8a601d6869abe1409f4a3f75f097c37b50a36a3bf165810a6e23f28"},
+    {file = "pyotp-2.6.0.tar.gz", hash = "sha256:d28ddfd40e0c1b6a6b9da961c7d47a10261fb58f378cb00f05ce88b26df9c432"},
 ]
 "python-dateutil 2.8.2" = [
     {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
