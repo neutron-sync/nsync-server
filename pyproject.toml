@@ -1,6 +1,6 @@
 [project]
 name = "nsync-server"
-version = "0.5.0"
+version = "1.0.0"
 description = ""
 authors = [
     {name = "Paul Bailey", email = "paul@neutron.studio"},

@@ -64,6 +64,7 @@ MIDDLEWARE = [
   'django.contrib.auth.middleware.AuthenticationMiddleware',
   'django.contrib.messages.middleware.MessageMiddleware',
   'django.middleware.clickjacking.XFrameOptionsMiddleware',
+  'django_2fa.middleware.MFAProctectMiddleware',
 ]
 
 ROOT_URLCONF = os.environ.get('URLCONF', 'nsync_server.nsync.urls')
@@ -163,6 +164,7 @@ CACHES = {
 LOGIN_URL = '/admin/login/'
 LOGIN_REDIRECT_URL = '/'
 
+MFA_PROTECT_PATH_STARTSWITH = ('/admin/',)
 
 def import_extra_settings(mod):
   mdl = importlib.import_module(mod)
