@@ -20,7 +20,7 @@ dependencies = [
     "dj-database-url~=0.5",
     "django-2fa~=0.1",
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 license = {text = "MIT"}
 
 [project.urls]
