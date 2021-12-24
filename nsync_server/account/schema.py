@@ -41,6 +41,7 @@ class UserType(DjangoObjectType):
 class LoginMutation(DjangoFormMutation):
   user = graphene.Field(UserType)
   mfa_url = graphene.String()
+  token = graphene.String()
 
   class Meta:
     form_class = LoginForm
@@ -50,6 +51,7 @@ class LoginMutation(DjangoFormMutation):
     form = cls.get_form(root, info, **input)
     if form.is_valid():
       mfa_url = None
+      token = None
 
       user = authenticate(
         info.context,
@@ -60,10 +62,11 @@ class LoginMutation(DjangoFormMutation):
 
       if is_mfa_user(user):
         request = MFARequest.generate(user)
-        mfa_url = reverse('django_2fa:mfa-request', args=[request.token])
+        token = request.token
+        mfa_url = reverse('django_2fa:mfa-request', args=[token])
         mfa_url = "{}://{}{}".format(info.context.scheme, info.context.get_host(), mfa_url)
 
-      return cls(user=user, mfa_url=mfa_url)
+      return cls(user=user, mfa_url=mfa_url, token=token)
 
     else:
       errors = ErrorType.from_errors(form.errors)
