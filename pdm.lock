@@ -338,7 +338,7 @@ summary = "A formatter for Python code."
 
 [metadata]
 lock_version = "3.1"
-content_hash = "sha256:aa283de0b8c9ecf13e31aaf00ba4bcf8ff289daa7af68d51a285acec6ef911c3"
+content_hash = "sha256:658536a245b0fd6c5606e6cf2065eb4796784b7a0d6bb1b6912ae531196d2968"
 
 [metadata.files]
 "aniso8601 7.0.0" = [
