@@ -41,7 +41,7 @@ if EXTRA_APPS:
 else:
   EXTRA_APPS = []
 
-INSTALLED_APPS = [
+INSTALLED_APPS = EXTRA_APPS + [
   'django.contrib.admin',
   'django.contrib.auth',
   'django.contrib.contenttypes',
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
   'django_2fa',
   'nsync_server.account',
   'nsync_server.nstore',
-] + EXTRA_APPS
+]
 
 MIDDLEWARE = [
   'django.middleware.security.SecurityMiddleware',
