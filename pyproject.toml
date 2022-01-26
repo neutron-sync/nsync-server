@@ -18,7 +18,7 @@ dependencies = [
     "django~=3.2",
     "sqlparse~=0.4",
     "dj-database-url~=0.5",
-    "django-2fa~=0.1",
+    "django-2fa>=0.8.0",
 ]
 requires-python = ">=3.9"
 license = {text = "MIT"}
